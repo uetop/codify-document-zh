@@ -167,3 +167,17 @@ Codify 会将使用 `#` 开头的图层名称识别为一个插槽。这个属�
 // <el-button type="primary">Primary</el-button>
 // <Button type="primary">Primary</Button>
 ```
+
+## framework_type
+
+- Type: `string`
+
+你可以提前为你当前的配置预设前端框架的类型，例如 `react` 或者 `vue`，这样在插件中会默认生成对应的代码。
+
+```json
+{
+  "framework_type": "react"
+}
+```
+
+当前支持的框架类型：`react`, `vue`, `angular`, `html`, `json`。
