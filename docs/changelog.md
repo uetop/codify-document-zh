@@ -1,7 +1,11 @@
 # Changelog
 
+## v1.0.14
+- 增加：跳过容器直接解析子节点 [`skip_prefixes`](./guide/feature-setting.md#skip_prefixes)
+
+
 ## v1.0.13
-- 增加：支持预设框架类型 [`framework_type`](./guide/feature-setting.md#framework_type)
+- 增加：支持预设框架类型 [`framework_type`](./guide/feature-setting.md#framework-type)
 
 ## v1.0.12
 - 增加：图标解析器, [`icon`](./guide/component-parsers.html#图标解析器-icon)

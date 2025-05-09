@@ -98,6 +98,19 @@ Codify 会将使用 `#` 开头的图层名称识别为一个插槽。这个属�
 
 这显然是不符合预期的，所以我们要忽略这个节点。然后通过组件解析的方式将它的文本内容写入到标签中。详情请查看 [组件解析](/guide/component-parsers)
 
+
+## skip_prefixes
+
+- Type: `string | array`
+
+跳过上级节点，直接解析子集节点内容。
+
+```json
+"skip_prefixes": ["#default"],
+
+```
+
+
 ## block_component
 
 - Type: `string | array` 

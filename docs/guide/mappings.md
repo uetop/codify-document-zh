@@ -436,7 +436,7 @@ letter-spacing 属性 可以映射设计稿的 Letter spacing 样式。需要注
 
 - key: `数值`
 
-```json {8}
+```json
 "letter-spacing": {
   "0": "normal",
   "-5%": "tighter",
