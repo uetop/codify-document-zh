@@ -1,4 +1,7 @@
-# Changelog
+# 更新日志
+
+## v1.0.15
+- 增加: 新的 [`Grid`](./guide/style-parsers.html#grid) 解析，以适配 Figma 的 Grid 布局 
 
 ## v1.0.14
 - 增加：跳过容器直接解析子节点 [`skip_prefixes`](./guide/feature-setting.md#skip_prefixes)

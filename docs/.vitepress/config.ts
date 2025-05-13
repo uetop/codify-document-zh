@@ -18,7 +18,7 @@ export default {
       { text: 'Codify', link: 'https://codify.fun' },
 
       {
-        text: '多语言',
+        text: '语言',
         items: [
           { text: 'en', link: 'https://uetop.github.io/codify-document' },
           { text: '中文', link: 'https://uetop.github.io/codify-document-zh' },

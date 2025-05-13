@@ -695,3 +695,36 @@ body {
   "mappings": {}
 }
 ```
+
+## grid
+
+渲染 `display: grid` 以及 grid 的相关属性。
+
+- 用于解析Figma的 新容器 - `Grid` 这个属性与 CSS中的 Grid 特性完全一致。所以我们能够完整的将具有 Grid 布局的设计图转换为代码。
+
+```json{5-12}
+"grid": {
+  "filter": "",
+  "classAttr": "class",
+  "styleAttr": "style",
+  "classPrefix": {
+    "columns": "grid-cols-",
+    "rows": "grid-rows-",
+    "column-span": "col-span-",
+    "row-span": "row-span-",
+    "rowStart": "row-start-",
+    "columnStart": "column-start-"
+  },
+  "getCssVar": false,
+  "getArbitraryVar": true, // 如果要使用tailwind样式，记得将它设置为 true
+  "mappings": {}
+}
+```
+>  这里的 `classPrefix` 可以同时为 `grid` 相关属性设置样式名称的前缀。
+
+### 输出案例
+```html
+<div class="grid grid-cols-3 grid-rows-4">
+  <div class="col-span-2 row-start-3"></div>
+</div>
+```
