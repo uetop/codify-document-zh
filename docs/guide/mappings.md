@@ -634,10 +634,26 @@ Position 属性能够映射 Figma 中的 `Constraints` 样式，
 
 ```json
 "position": {
-  "fixed": "fixed",
-  "relative": "relative",
-  "absolute": "absolute",
-  "sticky": "sticky"
+  "position-type": {
+    "fixed": "fixed",
+    "relative": "relative",
+    "absolute": "absolute",
+    "sticky": "sticky"
+  },
+  "placement": {
+    "top": {
+      "0": "0"
+    },
+    "bottom": {
+      "0": "0"
+    },
+    "left": {
+      "0": "0"
+    },
+    "right": {
+      "0": "0"
+    }
+  }
 }
 ```
 

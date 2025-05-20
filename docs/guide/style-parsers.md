@@ -683,18 +683,24 @@ body {
 - 如果解析程序未检索到图层的 "Auto Layout" 属性，则以 `position: absolute` 属性输出。
 - 如果你的 "Auto Layout" 节点中含有 "absolute position" 信息，则以 `position: absolute` 属性输出。并且会根据你设置的 "Constraints" 方向来输出 `left:` 、`top:`、`right:`和`bottom:` 属性。
 
-```json
+```json {6-11}
 "position": {
   "nodeName": "",
   "filter": "",
   "classAttr": "class",
   "styleAttr": "style",
-  "classPrefix": "",
-  "stylePrefix": "position",
+  "classPrefix": {
+    "left": "left-",
+    "right": "right-",
+    "top": "top-",
+    "bottom": "bottom-"
+  },
   "getCssVar": false,
+  "getArbitraryVar": true,
   "mappings": {}
 }
 ```
+>  `classPrefix` 现在可以分别为四个方向的样式名称设置前缀。
 
 ## grid
 
@@ -720,7 +726,7 @@ body {
   "mappings": {}
 }
 ```
->  这里的 `classPrefix` 可以同时为 `grid` 相关属性设置样式名称的前缀。
+>  这里的 `classPrefix` 可以分别为 `grid` 相关属性设置样式名称的前缀。
 
 ### 输出案例
 ```html
