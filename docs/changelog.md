@@ -1,5 +1,8 @@
 # 更新日志
 
+## v1.0.16
+- 增加: [`div_name`](./guide/feature-setting.md#div-name) 特征设置，用于将div标签设置为你的预设
+
 ## v1.0.15
 - 增加: 新的 [`Grid`](./guide/style-parsers.html#grid) 解析，以适配 Figma 的 Grid 布局 
 

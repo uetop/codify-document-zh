@@ -194,3 +194,21 @@ Codify 会将使用 `#` 开头的图层名称识别为一个插槽。这个属�
 ```
 
 当前支持的框架类型：`react`, `vue`, `angular`, `html`, `json`。
+
+## div_name
+
+- Type: `string`
+
+你可以为 `div` 标签重新命名，例如 `view`
+
+```json
+{
+  "div_name": "view"
+}
+
+// 之前：
+// <div>content</div>
+
+// 之后：
+// <view>content</view>
+```
