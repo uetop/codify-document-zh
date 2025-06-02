@@ -274,28 +274,61 @@ Mappings 是根据 Figma 布局特性进行样式映射的。虽然它不包含�
 }
 ```
 
-## gap
+## gap <Badge type="tip" text="1.0.17" />
 
 适用于弹性布局和网格布局 的 `gap:` 属性
 
-```json{6-10}
+```json{6,7}
 "gap": {
   "nodeName": "",
   "filter": "0",
   "classAttr": "class",
   "styleAttr": "style",
-  "classPrefix": {
-    "gap": "gap-",
-    "column-gap": "gap-x-",
-    "row-gap": "gap-y-"
-  },
+  "classPrefix": "gap-",
   "stylePrefix": "gap",
   "getCssVar": false,
   "mappings": {}
 }
 ```
 
-`classPrefix` [渲染器选项](/guide/render-options.html#classprefix)支持对象，你可以为每个方向设置不同的前缀。
+::: warning 
+在 `1.0.17` 版本后，`gap` 属性不在支持输出多个属性，如：`column-gap` 和 `row-gap`，取而代之的是新的 [`columnGap`](/guide/style-parsers.html#columngap) 和 [`rowGap`](/guide/style-parsers.html#rowgap) 样式解析器。
+:::
+
+## columnGap <Badge type="tip" text="1.0.17" />
+
+适用于弹性布局和网格布局 的 `column-gap:` 属性
+
+```json{6,7}
+"columnGap": {
+  "nodeName": "",
+  "filter": "0",
+  "classAttr": "class",
+  "styleAttr": "style",
+  "classPrefix": "gap-x-",
+  "stylePrefix": "column-gap",
+  "getCssVar": false,
+  "mappings": {}
+}
+```
+
+## rowGap <Badge type="tip" text="1.0.17" />
+
+适用于弹性布局和网格布局 的 `row-gap:` 属性
+
+```json{6,7}
+"rowGap": {
+  "nodeName": "",
+  "filter": "0",
+  "classAttr": "class",
+  "styleAttr": "style",
+  "classPrefix": "gap-y-",
+  "stylePrefix": "row-gap",
+  "getCssVar": false,
+  "mappings": {}
+}
+```
+
 
 ## padding
 

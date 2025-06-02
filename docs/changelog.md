@@ -1,7 +1,11 @@
 # 更新日志
 
+## v1.0.17
+- 增加: [`columnGap`](/guide/style-parsers.html#columngap) 和 [`rowGap`](/guide/style-parsers.html#rowgap) 样式解析器
+- 更改: [`gap`](/guide/style-parsers.html#gap) 属性不再支持 `column-gap` 和 `row-gap` 的样式解析
+
 ## v1.0.16
-- 增加: [`div_name`](./guide/feature-setting.md#div-name) 特征设置，用于将div标签设置为你的预设
+- 增加: [`auto_layout_tag`](./guide/feature-setting.md#auto-layout-tag) 特征设置，用于将div标签设置为你的预设
 
 ## v1.0.15
 - 增加: 新的 [`Grid`](./guide/style-parsers.html#grid) 解析，以适配 Figma 的 Grid 布局 

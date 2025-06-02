@@ -195,7 +195,7 @@ Codify 会将使用 `#` 开头的图层名称识别为一个插槽。这个属�
 
 当前支持的框架类型：`react`, `vue`, `angular`, `html`, `json`。
 
-## div_name
+## auto_layout_tag
 
 - Type: `string`
 
@@ -203,7 +203,7 @@ Codify 会将使用 `#` 开头的图层名称识别为一个插槽。这个属�
 
 ```json
 {
-  "div_name": "view"
+  "auto_layout_tag": "view"
 }
 
 // 之前：

@@ -162,7 +162,7 @@ filterInComponent 选项，可以禁止样式解析程序在组件中发挥作�
 
 ## classPrefix
 
-- Type: `string`
+- Type: `string` | `object`
 
 在样式映射时，可以通过前缀名称来增加前缀。这样的功能在某些场景下非常有用。请继续阅读下面的示例：
 
