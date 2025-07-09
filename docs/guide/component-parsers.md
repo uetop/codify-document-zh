@@ -17,7 +17,8 @@ Codify 能将设计组件映射到前端组件上。这意味着你可以轻松�
 
 ![alt text](/images/create-component.png)
 
-首选我们创建了一个 名为 `<button>` 的组件和它的各种变体。同时还选择了 `text` 图层作为组件的文本内容。下面我要做的是在 Codify 后台的  [component_parsers.json](https://codify.fun) 文件中编写解析这个 button 组件的配置。
+首先我们创建了一个 名为 `<button>` 的组件和它的各种变体。同时还选择了 `text` 图层作为组件的文本内容。下面我要做的是在 Codify 后台的  [component_parsers.json](https://codify.fun) 文件中编写解析这个 button 组件的配置。
+
 
 ### 最简单的组件解析配置
 
