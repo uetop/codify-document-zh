@@ -2,7 +2,7 @@
 
 Codify 插件可以将 Figma 的样式信息映射为 Class name。这样你在生成代码时，会生成对应的原子级样式。
 
-例如非常热门的 CSS 框架 `Tailwind`，和你自定义的 Class 工具类。同时我们也极力推荐你的项目使用原子级 Class 来构建 UI界面。
+例如非常热门的 CSS 框架 `Tailwind`，和你自定义的 Class 工具类。同时我们也极力推荐你的项目使用原子级 Class 来构建 UI 界面。
 
 ::: details 为什么推荐使用原子级 Class 类来构建 UI 界面
 
@@ -26,17 +26,15 @@ Codify 插件可以将 Figma 的样式信息映射为 Class name。这样你在�
 
 _以上来自 Chatgpt 的回答。_
 
-> 当前没有一个更好的手段来生成语义化的 Class name。同时我们也不希望每个项目都让设计师去写元素的 Class name。所以当前大部分的 Design to Code 的工具都选择使用原子级 Class 类来构建界面。如果每次生成都产生新的 Class name，这会对代码的组织和项目的维护带来很大影响。
-所以 Codify 在 1.0.0 版本时重构了样式的解析程序，让插件在解析设计稿样式的时候，先去检索它们是否有被映射到一个定义好的 Class name 上。同时我们也在继续探索更多的方式，来优化样式的生成。
+> 当前没有一个更好的手段来生成语义化的 Class name。同时我们也不希望每个项目都让设计师去写元素的 Class name。所以当前大部分的 Design to Code 的工具都选择使用原子级 Class 类来构建界面。如果每次生成都产生新的 Class name，这会对代码的组织和项目的维护带来很大影响。所以 Codify 在 1.0.0 版本时重构了样式的解析程序，让插件在解析设计稿样式的时候，先去检索它们是否有被映射到一个定义好的 Class name 上。同时我们也在继续探索更多的方式，来优化样式的生成。
 
 :::
 
 :::tip 小提示
-阅读此文件时，建议你先打开 [mappings.json](https://codify.fun) 一边阅读一边尝试。
+阅读此文件时，建议你先打开 [mappings.json](https://codify.fun) 一边阅读一边尝试。 
 :::
 
-
-## 格式说明
+## JSON 格式描述
 
 通过下面的文档来看，你可能很快的发现，这其实就是规范的 CSS 属性。我们为了解析设计稿的样式并将其转化为 CSS 属性。所以要按照 Codify 提供的格式来编写映射程序。
 
@@ -46,9 +44,10 @@ _以上来自 Chatgpt 的回答。_
 
 Codify 已经将 Figma 等原型设计工具的提供的样式属性映射成了 CSS 属性，使其更加易读。所以，你无需去了解 Figma Api。仅需要按照本文档的格式去编写即可。甚至直接粘贴到 [mappings.json](https://codify.fun/) 中即可使用。
 
-
 ## 关于类名的前缀设置
+
 类名可以在 样式解析程序 中通过 [渲染器选项](/guide/render-options.html#classprefix) 来统一设置前缀。如果在样式解析程序中设置了前缀，当前样式映射就不需要加上前缀了。例如：
+
 ```json {7,15,22}
 // style-parsers
 "justifyContent": {
@@ -78,8 +77,6 @@ justify-start
 
 以下的示例将以 `Tailwind` 为基础来配置样式映射。这并不代表你只能使用 Tailwind 的工具类。如果刚好你想配置一个 Tailwind 的工具类，你可以直接将下面的代码复制，然后添加到 [mappings.json](https://codify.fun/) 中。
 
-
-
 ## width
 
 - key: `width 的值`
@@ -91,6 +88,7 @@ justify-start
   //.....
 }
 ```
+
 ## min-width
 
 - key: `min-width 的值`
@@ -102,6 +100,7 @@ justify-start
   //.....
 }
 ```
+
 ## max-width
 
 - key: `max-width 的值`
@@ -137,6 +136,7 @@ justify-start
   //.....
 }
 ```
+
 ## max-height
 
 - key: `max-height 的值`
@@ -163,20 +163,22 @@ justify-start
 
 ## flex
 
-- key: `none | auto | fill-x | fill-y | wrap`
+- key: `none | hug-x | hug-y | fill-x | fill-y | wrap`
 
-| Figma 属性                | Codify 属性 |
-| ------------------------- | ----------- |
-| Fixed width               | none        |
-| Hub contents              | auto        |
-| Horizontal Fill container | fill-x      |
-| Vertical Fill container   | fill-y      |
-| Wrap                      | wrap        |
+| 画布 属性           | Codify 属性 |
+| ------------------- | ----------- |
+| 固定宽度 / 固定高度 | none        |
+| 适应内容-水平       | hug-x       |
+| 适应内容-垂直       | hug-y       |
+| 充满容器-水平       | fill-x      |
+| 充满容器-重置       | fill-y      |
+| 换行                | wrap        |
 
 ```json
 "flex": {
   "none": "flex-none",
-  "auto": "flex-auto",
+  "hug-x": "flex-auto",
+  "hug-y": "flex-auto",
   "fill-x": "flex-1",
   "fill-y": "self-stretch",
   "wrap": "flex-wrap"
@@ -187,12 +189,12 @@ justify-start
 
 - key: `flex-start | center | flex-end | space-between`
 
-| Figma 属性       | Codify 属性   |
+| 画布 属性        | Codify 属性   |
 | ---------------- | ------------- |
-| Align top left   | flex-start    |
-| Align top center | center        |
-| Align top right  | flex-end      |
-| Auto             | space-between |
+| 左上对齐           | flex-start    |
+| 顶部居中           | center        |
+| 右上对齐           | flex-end      |
+| 水平分布           | space-between |
 
 ```json
 "justify-content": {
@@ -207,11 +209,11 @@ justify-start
 
 - key: `flex-start | center | flex-end`
 
-| Figma 属性        | Codify 属性 |
+| 画布 属性         | Codify 属性 |
 | ----------------- | ----------- |
-| Align top left    | flex-start  |
-| Align left        | center      |
-| Align bottom left | flex-end    |
+| 左上对齐           | flex-start  |
+| 左中对齐           | center      |
+| 左下对齐           | flex-end    |
 
 ```json
 "align-items": {
@@ -221,18 +223,18 @@ justify-start
 }
 ```
 
-:::tip
-如果你的设计稿使用的是 `Align center` 属性， 解析工具会自动帮你写上 `justify-content` 和 `align-items` 中 `center` 所映射的样式名称。如：`class="justify-center items-center"`
+:::tip 
+如果你的设计稿使用的是 `Align center` 属性， 解析工具会自动帮你写上 `justify-content` 和 `align-items` 中 `center` 所映射的样式名称。如：`class="justify-center items-center"` 
 :::
 
 ## flex-direction
 
 - key: `row | column`
 
-| Figma 属性        | Codify 属性 |
+| 画布 属性         | Codify 属性 |
 | ----------------- | ----------- |
-| Vertical layout   | row         |
-| Horizontal layout | column      |
+| 垂直布局           | row         |
+| 水平布局           | column      |
 
 ```json
 "flex-direction": {
@@ -245,11 +247,11 @@ justify-start
 
 - key: `数值`
 
-| Figma 属性     | Codify 属性 |
+| 画布 属性      | Codify 属性 |
 | -------------- | ----------- |
-| gap            | gap         |
-| Vertical gap   | row-gap     |
-| Horizontal gap | column-gap  |
+| 间距             | gap         |
+| 行间距            | row-gap     |
+| 水平间距          | column-gap  |
 
 ```json
 "gap": {
@@ -281,17 +283,18 @@ justify-start
 
 - key: `字体名称`
 
-#### 你的CSS文件
+#### 你的 CSS 文件
 
 ```scss
 @font-face {
-  font-family: "poppins";
-  src: url("yourPath/poppins.ttc");
+  font-family: 'poppins';
+  src: url('yourPath/poppins.ttc');
 }
 .font-poppins {
-  font-family: "poppins";
+  font-family: 'poppins';
 }
 ```
+
 #### 映射表配置
 
 ```json
@@ -302,8 +305,8 @@ justify-start
 
 如果你的文字图层使用了字体映射表里的字体的话，会输出如 `class="font-poppins"` 这样的样式。
 
-:::tip
-系统默认的字体族不用在此定义。并且你还可以在 [font-family 解析程序](/guide/style-parsers#fontfamily) 中设置过滤系统默认字体。因为在通常情况下，我们不需要给每个文字节点都声明 `font-family` 样式。
+:::tip 
+系统默认的字体族不用在此定义。并且你还可以在 [font-family 解析程序](/guide/style-parsers#fontfamily) 中设置过滤系统默认字体。因为在通常情况下，我们不需要给每个文字节点都声明 `font-family` 样式。 
 :::
 
 ## color
@@ -341,8 +344,8 @@ justify-start
 
 尽管在调色板使用这样的命名方式是可行的，但它在前端中并不符合语义化命名的原则。因此，你可以选择将它们映射到相应的语义化类名上。
 
-::: warning
-所以在本文的配置中，所有有关颜色的样式，都没有按照 Tailwind 默认提供的命名格式。同时 Tailwind 也提出了命名修改建议，你可以参考 [Tailwind CSS 官方文档](https://tailwindcss.com/docs/customizing-colors#naming-your-colors)。
+::: warning 
+所以在本文的配置中，所有有关颜色的样式，都没有按照 Tailwind 默认提供的命名格式。同时 Tailwind 也提出了命名修改建议，你可以参考 [Tailwind CSS 官方文档](https://tailwindcss.com/docs/customizing-colors#naming-your-colors)。 
 :::
 
 ## heading
@@ -414,7 +417,7 @@ justify-start
 
 - key: `left | center | right | justify`
 
-| Figma 属性           | Codify 属性 |
+| 画布 属性            | Codify 属性 |
 | -------------------- | ----------- |
 | Text align left      | left        |
 | Text align center    | center      |
@@ -493,6 +496,7 @@ padding 对应 figma 中的 padding 样式. 你可以在 padding 的[样式解�
   // ......
 }
 ```
+
 如果你将一个图层节点的 `padding top` 设置为 16px 的话，它将输出 `pt-4`。 或者 如果你将一个图层节点的 `padding bottom` 也设置为 16px 的话，它将输出 `py-4`。
 
 ## background
@@ -518,6 +522,7 @@ Background 属性，对应 Figma 中的 Fill 样式。它和 [color](#color) 属
 我们非常清楚，文本的样式是写在 `color:` 属性上的，而背景颜色是写在 `background-color:` 属性上，这两个属性并不通用。 假如你在 Figma 中，将 color 的样式填充到某个 `Frame` 或者 `Shape` 节点的话，它将输出 `background-color: var(--text-primary)`。所以你应该为你的前端项目，提前准备好 `Css Variable`。Codify 插件也可以帮你一键将 Figma 的样式导出为 `Css Variable`。
 
 ## border-color
+
 - color key: `样式名称`
 
 ```json
@@ -531,6 +536,7 @@ Background 属性，对应 Figma 中的 Fill 样式。它和 [color](#color) 属
 ```
 
 ## border-width
+
 - key: `数值`
 
 ```json
@@ -544,6 +550,7 @@ Background 属性，对应 Figma 中的 Fill 样式。它和 [color](#color) 属
 ```
 
 ## border-style
+
 - key: `solid | dashed | dotted`
 
 ```json
@@ -561,6 +568,7 @@ border color 的属性如同 background color 一样，你需要在 Figma 的样
 ## radius
 
 radius 属性，对应 Figma 中的 Corner radius 样式。
+
 - key: `数值`
 
 ```json{12}
@@ -576,8 +584,8 @@ radius 属性，对应 Figma 中的 Corner radius 样式。
   "9999": "full"
 }
 ```
-如上面代表高亮所示，如果你希望像 taiwind 那样，仅输出一个 `rounded` 的样式，而不是 `rounded-default`。你可以将它映射到 `default` 上。这样一来，设计稿中如果选择了 4px 的边框，则会直接输出 `rounded`。
 
+如上面代表高亮所示，如果你希望像 taiwind 那样，仅输出一个 `rounded` 的样式，而不是 `rounded-default`。你可以将它映射到 `default` 上。这样一来，设计稿中如果选择了 4px 的边框，则会直接输出 `rounded`。
 
 ## opacity
 
@@ -612,6 +620,7 @@ Opacity 属性，对应 Figma Layer 中的 Opacity 样式。而不是颜色的�
 ```
 
 ## box-shadow
+
 Box shadow 同 [color](#color) 一样，它用于映射你在 Figma 设计稿中定义的阴影样式。
 
 ```json
@@ -657,7 +666,7 @@ Position 属性能够映射 Figma 中的 `Constraints` 样式，
 }
 ```
 
-还能够根据你设计稿选择的值，来决定 `top`, `right`, `bottom`, `left` 4个属性。请参考 [样式解析程序](/guide/style-parsers#position)
+还能够根据你设计稿选择的值，来决定 `top`, `right`, `bottom`, `left` 4 个属性。请参考 [样式解析程序](/guide/style-parsers#position)
 
 ## overflow
 

@@ -9,8 +9,7 @@ Codify 读作 `kəʊdɪfaɪ`， 其意为：将某个概念、规则或过程转
 
 
 ## 支持哪些平台？
-除了 Figma 以外，Codify 还将陆续支持 MasterGo、JS Design、Pixso 等主流原型设计平台。
-![支持平台](/images/logos.svg)
+除了 Figma 和 MasterGo 以外，Codify 还将陆续支持主流原型设计平台。
 
 ::: tip 
 注册一个 Codify 帐号，就可以在多个平台上使用它。这意味着你只需一个帐号，就可以在不同的平台上享受 Codify 的功能和服务。

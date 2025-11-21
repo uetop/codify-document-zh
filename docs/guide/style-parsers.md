@@ -6,7 +6,7 @@
 
 ## 特点
 
-解析程序会判断图层样式是否为 `class` 或 `style`。如果你的选项（Options）为特定的样式映射了对应的类名，它会自动将类名写入相应的 `classAttr` 属性中。以下是一个示例：
+解析程序会判断图层样式是否为 `class` 或 `style`。如果你的渲染器选项（Render Options）为特定的样式映射了对应的类名，它会自动将类名写入相应的 `classAttr` 属性中。以下是一个示例：
 
 ```json{16-19}
 // 假设获取的目标图层 Fill 为白色填充 #fff
@@ -642,6 +642,30 @@ body {
   "mappings": {}
 }
 ```
+
+## textTruncate
+
+解析文本的截断属性。
+
+```json
+"textTruncate": {
+  "nodeName": "",
+  "filter": "",
+  "classAttr": "class",
+  "styleAttr": "style",
+  "getCssVar": false,
+  "getArbitraryVar": false,
+  // 你也可以为它单独映射一个你项目中已存在的类名
+  "mappings": {
+    "1": "line-clamp-1",
+    "2": "line-clamp-2",
+    "3": "line-clamp-3",
+  }
+}
+```
+>  textTruncate 会根据设计稿中的截断行数来自动设置 [line-clamp](https://developer.mozilla.org/zh-CN/docs/Web/CSS/line-clamp) 样式。 请关注该属性在各浏览器的兼容性。
+
+
 
 ## image
 

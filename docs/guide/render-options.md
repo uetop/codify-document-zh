@@ -40,7 +40,7 @@ Render Options 是一个渲染钩子，它在 [样式解析程序](/guide/style-
 
 ```json
 "text": {
-  "nodeName": "_title" // 这里的 `_title` 指 Figma 的图层名称
+  "nodeName": "_title" // 这里的 `_title` 指画布的图层名称
 }
 ```
 
@@ -449,50 +449,6 @@ class="w-[100px]"
 
 //输出
 style="width: 100px"
-
-```
-
-## childComponent
-
-- Type: `boolan`
-- Default: `false`
-
-是否以子组件的模式渲染。
-
-```json
-"icon": {
-  "nodeName": {
-    "name": "icon",
-  },
-  "childComponent": true
-}
-```
-
-## getComponentName
-
-- Type: `boolan`
-- Default: `false`
-
-是否仅输出组件的名称，而不是组件的代码。例如我们解析一个 React 的图标组件：
-
-```jsx
-"Icon": {
-  "icon": {
-    "nodeName": {
-      "name": "icons",
-      "deepFind": true
-    },
-    "attrName": "component",
-    "getComponentName": false // [!code highlight]
-  }
-}
-
-<Icon component={<SmileOutlined />} />
-
-
-"getComponentName": true // [!code highlight]
-
-<Icon component={SmileOutlined} />
 
 ```
 

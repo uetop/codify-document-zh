@@ -1,5 +1,8 @@
 # 更新日志
 
+## v1.0.18
+- 增加：Codify AI 支持接入你自己的模型Api。在 [Codify.fun](https://codify.fun) `我的团队` / `AI 驱动` 选项卡中设置即可。 
+
 ## v1.0.17
 - 增加: [`columnGap`](/guide/style-parsers.html#columngap) 和 [`rowGap`](/guide/style-parsers.html#rowgap) 样式解析器
 - 更改: [`gap`](/guide/style-parsers.html#gap) 属性不再支持 `column-gap` 和 `row-gap` 的样式解析

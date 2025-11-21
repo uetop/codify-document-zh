@@ -2,7 +2,7 @@
 
 Codify 能将设计组件映射到前端组件上。这意味着你可以轻松地生成真实、可交互的前端代码。
 
-### 如何使用
+## 如何使用
 
 建议你在尝试编写时：
 
@@ -42,32 +42,6 @@ Codify 会将使用 `<>` 尖括号包裹的图层名称标记为一个前端组�
 <el-button></el-button>
 ```
 但是它并没有输出任何内容和属性。此时你需要通过 [渲染器选项](/guide/render-options) 来为组件添加它的渲染内容。
-
-## 渲染器选项
-
-通过 [渲染器选项](/guide/render-options) 可以为组件定制组件的解析方式。
-
-<video controls autoplay loop muted src="/images/set-components.mp4" title="set components" style="border-radius: 12px;"></video>
-
-```json
-"button": {
-  "props": {},
-  "text": {
-    "params": {
-      "nodeName": "text"
-    }
-  },
-  "type": {
-    "params": {
-      "valueFrom": "background"
-    }
-  },
-  "disabled": {},
-  "flex": {}
-},
-```
-
-其它的组件配置方式与 `button` 配置方式类似。Codify 提供了一套演示组件和配置，你可以在 [资源社区](https://www.figma.com/community/file/1362976228899599536/codify-uikit) 中下载并演示。
 
 ## 使用样式解析器来解析多个图层
 通常在组件制作时，我们会读取的多个图层的属性来作为组件的属性。例如：
@@ -115,6 +89,51 @@ Codify 会将使用 `<>` 尖括号包裹的图层名称标记为一个前端组�
 }
 ```
 你也可以在下面的配置中找到类似的使用示例
+
+## 渲染器选项
+
+通过 [渲染器选项](/guide/render-options) 可以为组件定制组件的解析方式。
+
+<video controls autoplay loop muted src="/images/set-components.mp4" title="set components" style="border-radius: 12px;"></video>
+
+```json
+"button": {
+  "props": {},
+  "text": {
+    "params": {
+      "nodeName": "text"
+    }
+  },
+  "type": {
+    "params": {
+      "valueFrom": "background"
+    }
+  },
+  "disabled": {},
+  "flex": {}
+},
+```
+
+其它的组件配置方式与 `button` 配置方式类似。Codify 提供了一套演示组件和配置，你可以在 [资源社区](https://www.figma.com/community/file/1362976228899599536/codify-uikit) 中下载并演示。
+
+## 重命名组件名称 name
+你可以为组件设置 name 选项以重写组件的名称
+```json
+"button": {
+  ...
+}
+// 默认渲染为
+<button>...</button>
+
+// 增加 name 选项
+"button": {
+  "name": "my-button"
+}
+// 渲染为
+<my-button>...</my-button>
+```
+
+
 
 ## 属性解析器 props
 
@@ -165,25 +184,6 @@ Codify 会将使用 `<>` 尖括号包裹的图层名称标记为一个前端组�
 ```
 如果你设置了特征库的 [ignore_prefixes](/guide/feature-setting#ignore-prefixes) ，系统将优先过滤配置里的节点名称。
 
-## 类型解析器 type
-
-`type` 用于获取组件的类型。使用了类型解析器时，Codify 会根据你设置的 [status_color](/guide/feature-setting#status-color) 颜色来输出对于的类型。例如：
-
-```json{4}
-"type": {
-  "nodeName": "",
-  "valueFrom": "background",
-  "attrName": "type",
-  "filter": "default"
-}
-```
-当你选择了 `primary` 样式，此时会输出`<Button type="primary">Primary Button</Button>`，其它属性请参考[渲染器选项](/guide/render-options)
-
-如果你希望将属性写入到其它名称，可以更改 `attrName` 属性的值。例如：`"attrName": "color"`, 此时会输出`<Button color="primary">Primary Button</Button>`
-
-:::tip
-`traverse` `attrs` 和 `type` 解析器是专门为组件解析器设计的。在阅读[组件解析器](/guide/component-parsers)文档时，你会经常遇到它们。
-:::
 
 ## 多用途属性解析器 attr
 
@@ -281,7 +281,191 @@ Codify 会将使用 `<>` 尖括号包裹的图层名称标记为一个前端组�
 
 ```
 
-## 图标解析器 icon
+## 图标解析 icon
+解
+使用 `icon` 解析器，可用于解析的图标组件。你可以通过设置 [nodeName](/guide/render-options.html#nodename) 来获取指定图标图层的名称。例如我们为 `Button` 组件设置图标属性：
+
+```jsx
+"Button": {
+  "props": {},
+  "text": {
+    "nodeName": "_text"
+  },
+  "flex": {},
+  "icon": {
+    "attrName": "icon",
+    "nodeName": {
+      "name": "icon",
+      "deepFind": true
+    }
+  }
+}
+
+// 可以得到下面的结果
+<el-button type="primary" :icon="SearchOutlined">
+  Search
+</el-button>
+
+// React 的组件可能是这样
+<Button type="primary" icon={<SearchOutlined />}>
+  Search
+</Button>
+```
+
+### 使用 getComponentName 将图标渲染为指定的值
+
+- Type: `boolan` ｜ `string`
+- Default: `false`
+
+`getComponentName` 可以设置渲染为 `变量`、`对象` 或者 `字符串`。例如我们解析一个 React 的图标组件：
+
+```jsx
+"Icon": {
+  "icon": {
+    "nodeName": {
+      "name": "icons",
+      "deepFind": true
+    },
+    "attrName": "value",
+    "getComponentName": false // [!code highlight]
+  }
+}
+// 渲染为 对象
+<Icon value={<SmileOutlined />} />
+
+// 渲染为 变量
+"getComponentName": true // [!code highlight]
+<Icon value={SmileOutlined} />
+
+// 渲染为 字符串
+"getComponentName": "string" // [!code highlight]
+<Icon value="SmileOutlined"} />
+
+
+```
+
+### 使用 childComponent 将图标渲染为子元素
+
+默认情况下，`icon` 解析器会将图标渲染为组件属性。但是，你也可以通过设置 `childComponent` 来将图标渲染为一个单独的子元素。例如：
+
+```js {3}
+// 例如，我们有一个名为 Button 的组件
+// 并且，假如你的图标名称为 @SearchOutlined
+"Button": {
+  // ... 
+  // 解析图标组件
+  "icon": {
+    "nodeName": {
+      "name": "icon",
+      "deepFind": true
+    },
+    "attrName": "#icon", // 设置图标组件的属性名称为 #icon
+    "childComponent": {
+      "parentType": "slot",  // 设置图标组件的父元素类型为 slot
+      "parentTag": "template" // 设置图标组件的父元素标签为 template
+    }
+  }
+}
+
+// 可以得到下面的结果
+<Button>
+  <template #icon>
+    <SearchOutlined />
+  </template>
+</Button>
+
+```
+
+## 公共图标组件
+如果你想批量解析图标，而不希望为每个图标都单独配置组件解析。你可以在设计文件中将图标图层名称设置一个 [`icon_prefix`](/guide/feature-setting.html#icon-prefix) 规则，即可自动解析为图标组件，并得到以下的结果：
+
+```jsx
+// 图层名称
+// @SearchOutlined
+
+<SearchOutlined />
+```
+
+如果你需要公共图标组件可以输出样式属性，你可以按如下设置：
+
+```json
+// 1. 打开 component-parsers 配置界面
+// 2 .在文件中添加：
+
+"@icons": {
+  "width": {
+    "filter": "",
+    "classPrefix": "",
+    "stylePrefix": "font-size",
+    "getCssVar": true
+  },
+  "background": {
+    "classPrefix": "",
+    "stylePrefix": "color",
+    "nodeName": {
+      "name": "Vector",
+      "deepFind": true
+    }
+  },
+},
+// 其它的组件解析配置 ... 
+
+// 你将得到如下结果：
+<SearchOutlined fontSize="24px"  color="#000"/>
+```
+
+
+## 公共文本组件
+为你的文本内容使用特定的标签，例如 `<text>name</text>`，这能有效避免频繁调用“文本组件”的繁琐操作。
+
+```json
+// 1. 打开 component-parsers 配置界面
+// 2 .在文件中添加：
+ "@text": {
+    "name": "abc-text", // 使用重命名属性
+    "text": {},
+    "width": {},
+    "height": {},
+    "minWidth": {},
+    "maxWidth": {},
+    "minHeight": {},
+    "maxHeight": {},
+    "display": {},
+    "flex": {},
+    "justifyContent": {},
+    "alignItems": {},
+    "color": {},
+    "fontSize": {},
+    "fontFamily": {},
+    "textAlign": {
+      "filter": [
+        "left",
+        "text-left"
+      ]
+    },
+    "fontWeight": {
+      "filter": [
+        "400"
+      ]
+    },
+    "lineHeight": {},
+    "letterSpacing": {},
+    "background": {},
+    "borderStyle": {},
+    "borderColor": {},
+    "borderWidth": {},
+    "opacity": {},
+    "boxShadow": {},
+    "position": {}
+  },
+// 其它的组件解析配置 ... 
+
+// 你将得到如下结果：
+<abc-text>文本内容</abc-text>
+```
+
+
+## 插槽 #slot
 
 `icon` 用于解析的图标组件。你可以通过设置 [nodeName](/guide/render-options.html#nodename) 来获取指定的图标。例如我们为 `Button` 组件设置图标属性：
 
