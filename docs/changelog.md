@@ -1,5 +1,8 @@
 # 更新日志
 
+## v1.0.19
+- 增加：[object 解析程序](/guide/component-parsers.html#对象解析器-object) ，现在你可以将子组件以数组对象的形式来渲染。
+
 ## v1.0.18
 - 增加：Codify AI 支持接入你自己的模型Api。在 [Codify.fun](https://codify.fun) `我的团队` / `AI 驱动` 选项卡中设置即可。 
 

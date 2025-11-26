@@ -498,3 +498,72 @@ Codify 会将使用 `<>` 尖括号包裹的图层名称标记为一个前端组�
 ```
 
 然而，这不需要你做任何设置。
+
+## 对象解析器 object
+
+你可以通过 `object` 对象解析器来将子组件渲染成一个数组对象
+
+```jsx
+// 例如一个常见的 React 组件
+const App: React.FC = () => <Tabs defaultActiveKey="1" items={[
+  {
+    key: '1',
+    label: 'Tab 1',
+    children: 'Content of Tab Pane 1',
+  },
+  {
+    key: '2',
+    label: 'Tab 2',
+    children: 'Content of Tab Pane 2',
+  },
+  {
+    key: '3',
+    label: 'Tab 3',
+    children: 'Content of Tab Pane 3',
+  },
+]} />;
+
+// 在默认情况下会被渲染成这样:
+<Tabs defaultActiveKey="1">
+  <Tab.Item key="1" label="Tab 1">Content of Tab Pane 1</Tab.Item>
+  <Tab.Item key="2" label="Tab 2">Content of Tab Pane 2</Tab.Item>
+  <Tab.Item key="3" label="Tab 3">Content of Tab Pane 3</Tab.Item>
+</Tabs>
+
+```
+
+使用 `object` 将其子组件渲染成对象
+
+```json {11-25}
+{
+  "Tabs": {
+    "props": {
+      // 在解析属性时，使用 customProps 选项, {items} 为属性名称
+      // 同时也指向子元素的 object 解析程序的 name
+      "customProps": "{items}"// [!code highlight]
+    },
+    "traverse": {}
+  },
+  "Tab.Item": {
+    "props": {},
+    "traverse": {},
+    "object": {
+      "name": "items",
+      "mappings": {
+        "key": "",
+        "label": {
+          "text": {
+            "nodeName": "_text"
+          }
+        },
+        "children": {
+          "text": {
+            "nodeName": "_text"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
