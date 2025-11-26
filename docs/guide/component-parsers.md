@@ -534,7 +534,7 @@ const App: React.FC = () => <Tabs defaultActiveKey="1" items={[
 
 使用 `object` 将其子组件渲染成对象
 
-```json {11-25}
+```json {13-28}
 {
   "Tabs": {
     "props": {
