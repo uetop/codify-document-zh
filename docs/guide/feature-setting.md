@@ -357,6 +357,7 @@ Codify 还会将使用 `<>` 尖括号包裹的图层名称识别为一个前端�
 - unit_type: `px` | `rem` | `pt` | `mm` | `cm` | `rpx`
 - root_font_size: `number` | `string`
 - dpi: `number` | `string`
+- scaling: `number`
 
 单位转换。你可以为一些单位设置转换规则，例如 `px` 转换为 `rem`。
 
@@ -366,6 +367,16 @@ Codify 还会将使用 `<>` 尖括号包裹的图层名称识别为一个前端�
     "unit_type": "px", // 单位类型
     "root_font_size": "14", // 根字体大小
     "dpi": "96" // dpi
+  }
+}
+```
+
+如果你只需要缩放尺寸，而不需要将 `px` 转换为其它单位，你可以做如下设置：
+```json
+{
+  "unit_conversion": {
+    "unit_type": "px", // 单位类型
+    "scaling": 2, // 缩放倍数
   }
 }
 ```
