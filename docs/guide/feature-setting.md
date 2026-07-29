@@ -16,6 +16,7 @@ Codify 在开始生成代码之前，会先解析特征配置中的设置，以�
   "enable_token_render": true,
   "enable_export_setting_to_image": false,
   "enable_instance_realname": true,
+  "enable_aggregate_styles": true,
   "resource_path": {
     "svg": "./svg/",
     "image": "./image/"
@@ -149,6 +150,18 @@ Codify 在开始生成代码之前，会先解析特征配置中的设置，以�
 
 ```json
 "enable_instance_realname": true,
+```
+
+
+## enable_aggregate_styles
+
+- Type: `boolean`
+- Default: `true`
+
+启用聚合样式后，所有内联样式都会合并到 class 中。缺点是无法指定语义化的类名，而且它比原子类要大得多。
+
+```json
+"enable_aggregate_styles": true,
 ```
 
 ## resource_path <Badge type="warning" text="1.0.5" />
